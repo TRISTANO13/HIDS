@@ -14,7 +14,7 @@ $smtpPort = 587                                    # Port sécurisé pour Gmail
 
 # Authentification pour le serveur SMTP (Gmail)
 $smtpUser = "tristanmenard13@gmail.com"   # Votre adresse Gmail
-$smtpPassword = "wljl ygyr psht caja"                      # Mot de passe d'application Gmail (à configurer)
+$smtpPassword = "mdp"                      # Mot de passe d'application Gmail (à configurer)
 
 # Fréquence de vérification (en secondes)
 $intervalSeconds = [int](Read-Host "Entrez l'intervalle de vérification en secondes") 

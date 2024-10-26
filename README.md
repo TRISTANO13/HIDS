@@ -21,4 +21,7 @@ Ouvrez le fichier HIDS.ps1 et modifiez les paramètres suivant :
 Lancez le fichier start.bat
 
 Il vous sera demandé d'indiquer le chemin du dossier à surveiller, l'intervalle de vérification (en secondes), les alertes à activer.
+Pour maintenir le script en marche, il est nécessaire de maintenir la fenêtre ouverte (possiblité de la réduire mais pas de la fermer).
+
+Il est possible de lancer plusieurs instance du script pour activer la surveillance sur des dossiers différents.
 

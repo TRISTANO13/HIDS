@@ -22,7 +22,7 @@ $pathsToMonitor += $userPath
 # Adresse email d'alerte (admin) (serveur SMTP Gmail utilisé)
 $emailFrom = "" # Votre adresse Gmail
 $emailTo = "" # Adresse de destination (peut être la même ou une autre adresse)
-$smtpServer = "" # Serveur SMTP de Gmail
+$smtpServer = "smtp.gmail.com" # Serveur SMTP de Gmail
 $smtpPort = 587 # Port sécurisé pour Gmail
 
 # Authentification pour le serveur SMTP (Gmail)

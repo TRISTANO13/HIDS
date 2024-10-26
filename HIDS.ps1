@@ -20,14 +20,14 @@ $userPath = Read-Host "Entrez le chemin d'un dossier ou d'un fichier à surveill
 $pathsToMonitor += $userPath
 
 # Adresse email d'alerte (admin) (serveur SMTP Gmail utilisé)
-$emailFrom = ""  # Votre adresse Gmail
-$emailTo = ""    # Adresse de destination (peut être la même ou une autre adresse)
-$smtpServer = ""                     # Serveur SMTP de Gmail
-$smtpPort = 587                                    # Port sécurisé pour Gmail
+$emailFrom = "" # Votre adresse Gmail
+$emailTo = "" # Adresse de destination (peut être la même ou une autre adresse)
+$smtpServer = "" # Serveur SMTP de Gmail
+$smtpPort = 587 # Port sécurisé pour Gmail
 
 # Authentification pour le serveur SMTP (Gmail)
-$smtpUser = ""   # Votre adresse Gmail
-$smtpPassword = ""                      # Mot de passe d'application Gmail (à configurer)
+$smtpUser = "" # Votre adresse Gmail
+$smtpPassword = "" # Mot de passe d'application Gmail (à configurer)
 
 # Fréquence de vérification (en secondes)
 $intervalSeconds = [int](Read-Host "

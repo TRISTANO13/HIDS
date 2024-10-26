@@ -1,34 +1,51 @@
-﻿# --------------------- Configuration des paramètres ---------------------
+﻿Write-Host "H   H  IIIIII  DDDD   SSSSS
+H   H    II    D   D  S
+HHHHH    II    D   D  SSSSS
+H   H    II    D   D      S
+H   H  IIIIII  DDDD   SSSSS
+"
+
+# --------------------- Configuration des paramètres ---------------------
 
 # Demander à l'utilisateur de spécifier les chemins des dossiers à surveiller
 $pathsToMonitor = @()
-$userPath = Read-Host "Entrez le chemin d'un dossier à surveiller (ou appuyez sur Entrée pour terminer)"
+Write-Host "
+Vous allez être invité à entrer les chemins des dossiers à surveiller. 
+Prenez en compte que les sous-dossiers seront également surveillés. 
+Plus les dossiers sont volumineux, plus la surveillance sera lente
+Il est aussi possible de surveiller un fichier en particulier en indiquant son chemin.
+"
+
+$userPath = Read-Host "Entrez le chemin d'un dossier ou d'un fichier à surveiller (ex: C:\Users\Utilisateur\Documents)"
 $pathsToMonitor += $userPath
 
-
-# Adresse email d'alerte (admin)
-$emailFrom = "tristanmenard13@gmail.com"  # Votre adresse Gmail
-$emailTo = "tristan.menard@efrei.net"    # Adresse de destination (peut être la même ou une autre adresse)
-$smtpServer = "smtp.gmail.com"                     # Serveur SMTP de Gmail
+# Adresse email d'alerte (admin) (serveur SMTP Gmail utilisé)
+$emailFrom = ""  # Votre adresse Gmail
+$emailTo = ""    # Adresse de destination (peut être la même ou une autre adresse)
+$smtpServer = ""                     # Serveur SMTP de Gmail
 $smtpPort = 587                                    # Port sécurisé pour Gmail
 
 # Authentification pour le serveur SMTP (Gmail)
-$smtpUser = "tristanmenard13@gmail.com"   # Votre adresse Gmail
-$smtpPassword = "mdp"                      # Mot de passe d'application Gmail (à configurer)
+$smtpUser = ""   # Votre adresse Gmail
+$smtpPassword = ""                      # Mot de passe d'application Gmail (à configurer)
 
 # Fréquence de vérification (en secondes)
-$intervalSeconds = [int](Read-Host "Entrez l'intervalle de vérification en secondes") 
+$intervalSeconds = [int](Read-Host "
+Entrez l'intervalle de vérification en secondes") 
 
 # Dossier pour stocker les hashs de référence
-$hashStorePath = "C:\hash_store\hash_store_$(($userPath -replace '[^\w]', '_')).json"
+$hashStorePath = "C:\hash_store\hash_store_$($userPath -replace '[^\w]', '_').json"
 
 # ---------------------- Sélection des alertes ----------------------
 
 # Demander à l'utilisateur quelles alertes il souhaite recevoir
-Write-Host "Choisissez les types d'alertes que vous souhaitez recevoir :"
-$alertModification = Read-Host "Voulez-vous recevoir des alertes pour les modifications de fichiers ? (true/non)"
-$alertCreation = Read-Host "Voulez-vous recevoir des alertes pour les nouvelles créations de fichiers ? (true/non)" 
-$alertSuppression = Read-Host "Voulez-vous recevoir des alertes pour les suppressions de fichiers ? (true/non)" 
+Write-Host "
+Choisissez les types d'alertes que vous souhaitez recevoir. Entrez 'true' pour activer l'alerte ou laissez vide pour la désactiver:
+"
+$alertModification = Read-Host "Activer les alertes pour les modifications de fichiers "
+$alertCreation = Read-Host "Activer les alertes pour les créations de fichiers " 
+$alertSuppression = Read-Host "Activer les alertes pour les suppressions de fichiers " 
+
 
 # ---------------------- Fonctions Utilitaires ----------------------
 

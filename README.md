@@ -1,27 +1,112 @@
-# HIDS
- HIDS powershell script
+# 🔐 HIDS PowerShell – Système de détection d'intrusion basé sur les fichiers
 
-Ce script permet de surveiller les modifications de fichiers dans des dossiers spécifiés, d'envoyer des alertes par e-mail lorsqu'une modification, une création ou une suppression est détectée, et de maintenir une base de données des hashs des fichiers surveillés.
+Ce projet est un **HIDS (Host-based Intrusion Detection System)** écrit en **PowerShell**, permettant de surveiller les fichiers et dossiers sur un système Windows afin de détecter les **modifications**, **créations** et **suppressions** de fichiers. En cas de changement, une alerte peut être envoyée par email via un serveur SMTP (Gmail, par défaut).
 
-Pour lancer le script, Powershell doit être installé sur votre système.
+## 📁 Fonctionnalités
 
-# Installation
-(La configuration proposée se fera avec Gmail. Il est possible d'utiliser un autre service de messagerie.)
+- 🔍 Surveillance de fichiers et dossiers spécifiés (y compris les sous-dossiers)
+- ⚠️ Alertes personnalisables :
+  - Création de fichier
+  - Modification de fichier
+  - Suppression de fichier
+- 📬 Envoi d'alertes par email (configuration SMTP Gmail)
+- 🧠 Mécanisme de hachage SHA256 pour détecter les changements
+- 🔒 Stockage des hashs dans un fichier `.json`
+- 🔁 Surveillance périodique avec intervalle réglable
 
-Ouvrez le fichier HIDS.ps1 et modifiez les paramètres suivant : 
-- $emailFrom : Votre adresse Gmail.
-- $emailTo : L'adresse e-mail qui recevra les alertes (elle peut être la même que $emailFrom).
-- $smtpServer : Utilisez "smtp.gmail.com".
+---
 
-- $smtpUser : Votre adresse Gmail.
+## 🚀 Lancement rapide
 
-- $smtpPassword : Le mot de passe d'application Gmail (à configurer depuis les paramètres de votre compte Google).
+### 1. Clone du projet
 
-# Utilisation
-Lancez le fichier start.bat
+```bash
+git clone https://github.com/tristano13/HIDS.git
+cd HIDS
+```
 
-Il vous sera demandé d'indiquer le chemin du dossier à surveiller, l'intervalle de vérification (en secondes), les alertes à activer.
-Pour maintenir le script en marche, il est nécessaire de maintenir la fenêtre ouverte (possiblité de la réduire mais pas de la fermer).
+### 2. Configuration des paramètres
 
-Il est possible de lancer plusieurs instance du script pour activer la surveillance sur des dossiers différents.
+Ouvrez le fichier `HIDS.ps1` et modifiez les lignes suivantes avec vos informations Gmail :
+
+```powershell
+$emailFrom = "votre.adresse@gmail.com"
+$emailTo = "destination@gmail.com"
+$smtpUser = "votre.adresse@gmail.com"
+$smtpPassword = "votre_mot_de_passe_d_application"
+```
+
+> ⚠️ Utilisez un **mot de passe d'application Gmail**, pas votre mot de passe principal. Activez l'authentification à deux facteurs et créez un mot de passe spécifique depuis [la page de sécurité Google](https://myaccount.google.com/security).
+
+### 3. Exécution du script
+
+Double-cliquez sur le fichier `start.bat` pour démarrer la surveillance avec PowerShell.
+
+> Ce fichier `.bat` sert à lancer le script PowerShell avec les bons paramètres de sécurité.
+
+---
+
+## 🛠️ Utilisation
+
+À l'exécution, le script vous demandera :
+
+1. Le chemin du fichier ou dossier à surveiller  
+2. L'intervalle de surveillance (en secondes)  
+3. Les types d'alertes à activer (`true` ou laisser vide)
+
+Exemple :
+```
+Entrez le chemin d'un dossier ou d'un fichier à surveiller: C:\Users\Admin\Documents
+Entrez l'intervalle de vérification en secondes: 30
+Activer les alertes pour les modifications de fichiers: true
+Activer les alertes pour les créations de fichiers: 
+Activer les alertes pour les suppressions de fichiers: true
+```
+
+---
+
+## 💌 Exemple d'alerte par email
+
+```
+Objet : Alerte HIDS: Modification détectée sur C:\Users\Admin\Documents\confidentiel.txt
+
+Contenu :
+Le fichier C:\Users\Admin\Documents\confidentiel.txt a été modifié sur l'hôte NOM-ORDINATEUR à 16/04/2025 21:34:15.
+```
+
+---
+
+## 📁 Structure du projet
+
+```
+hids-powershell/
+│
+├── HIDS.ps1                # Script principal PowerShell
+├── start.bat               # Script batch pour exécuter le HIDS facilement
+└── README.md             # Ce fichier
+```
+
+---
+
+## ❗ Recommandations
+
+- Ne pas surveiller de gros volumes système (comme `C:\Windows`) sans filtrage.
+- Ne pas lancer plusieurs fois le script en parallèle.
+- Assurez-vous que PowerShell est autorisé à s'exécuter (`Set-ExecutionPolicy RemoteSigned` ou `Bypass` dans le batch).
+- Sauvegardez bien vos alertes ou automatisez leur archivage via votre boîte mail.
+
+---
+
+## 🧠 Améliorations possibles
+
+- Interface graphique (WinForms / WPF)
+- Surveillance en temps réel via `FileSystemWatcher`
+- Base de données pour l’historique
+- Dashboard web pour consulter les événements
+
+---
+
+## 📄 Licence
+
+Ce projet est sous licence **MIT**. Libre à vous de le modifier, redistribuer, ou l'utiliser dans vos projets.
 

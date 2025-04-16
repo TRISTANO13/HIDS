@@ -79,7 +79,7 @@ Le fichier C:\Users\Admin\Documents\confidentiel.txt a été modifié sur l'hôt
 ## 📁 Structure du projet
 
 ```
-hids-powershell/
+HIDS/
 │
 ├── HIDS.ps1                # Script principal PowerShell
 ├── start.bat               # Script batch pour exécuter le HIDS facilement

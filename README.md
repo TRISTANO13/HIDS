@@ -21,7 +21,7 @@ Ce projet est un **HIDS (Host-based Intrusion Detection System)** écrit en **Po
 ### 1. Clone du projet
 
 ```bash
-git clone https://github.com/tristano13/HIDS.git
+git clone https://github.com/TRISTANO13/HIDS.git
 cd HIDS
 ```
 

@@ -1,0 +1,7 @@
+emailFrom=votre.adresse@gmail.com
+emailTo=destination@gmail.com
+smtpServer=smtp.gmail.com
+smtpPort=587
+smtpUser=votre.adresse@gmail.com
+smtpPassword=mot_de_passe_application
+

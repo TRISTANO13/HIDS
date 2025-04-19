@@ -19,15 +19,28 @@ Il est aussi possible de surveiller un fichier en particulier en indiquant son c
 $userPath = Read-Host "Entrez le chemin d'un dossier ou d'un fichier à surveiller (ex: C:\Users\Utilisateur\Documents)"
 $pathsToMonitor += $userPath
 
-# Adresse email d'alerte (admin) (serveur SMTP Gmail utilisé)
-$emailFrom = "" # Votre adresse Gmail
-$emailTo = "" # Adresse de destination (peut être la même ou une autre adresse)
-$smtpServer = "smtp.gmail.com" # Serveur SMTP de Gmail
-$smtpPort = 587 # Port sécurisé pour Gmail
+# Lecture de la configuration SMTP depuis un fichier texte
+$configFile = ".\smtp_config.txt"
 
-# Authentification pour le serveur SMTP (Gmail)
-$smtpUser = "" # Votre adresse Gmail
-$smtpPassword = "" # Mot de passe d'application Gmail (à configurer)
+if (Test-Path $configFile) {
+    Write-Host "📨 Chargement de la configuration SMTP depuis smtp_config.txt..."
+    $config = Get-Content $configFile | ConvertFrom-StringData
+    $emailFrom = $config["emailFrom"]
+    $emailTo = $config["emailTo"]
+    $smtpServer = $config["smtpServer"]
+    $smtpPort = [int]$config["smtpPort"]
+    $smtpUser = $config["smtpUser"]
+    $smtpPassword = $config["smtpPassword"]
+} else {
+    Write-Host "⚠️ Fichier smtp_config.txt non trouvé, utilisation des valeurs par défaut..."
+    # Valeurs par défaut à compléter dans le script
+    $emailFrom = "" # Votre adresse Gmail
+    $emailTo = ""   # Adresse de destination
+    $smtpServer = "smtp.gmail.com"
+    $smtpPort = 587
+    $smtpUser = ""  # Votre adresse Gmail
+    $smtpPassword = "" # Mot de passe d'application Gmail
+}
 
 # Fréquence de vérification (en secondes)
 $intervalSeconds = [int](Read-Host "

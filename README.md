@@ -1,3 +1,4 @@
+
 # 🔐 HIDS PowerShell – Système de détection d'intrusion basé sur les fichiers
 
 Ce projet est un **HIDS (Host-based Intrusion Detection System)** écrit en **PowerShell**, permettant de surveiller les fichiers et dossiers sur un système Windows afin de détecter les **modifications**, **créations** et **suppressions** de fichiers. En cas de changement, une alerte peut être envoyée par email via un serveur SMTP (Gmail, par défaut).
@@ -26,6 +27,25 @@ cd HIDS
 ```
 
 ### 2. Configuration des paramètres
+
+Vous pouvez configurer les paramètres SMTP de deux façons :
+
+#### ✅ Option 1 : Utiliser le fichier smtp_config.txt (recommandé)
+
+Créez un fichier `smtp_config.txt` dans le dossier du script avec le contenu suivant :
+
+```txt
+emailFrom=votre.adresse@gmail.com
+emailTo=destination@gmail.com
+smtpServer=smtp.gmail.com
+smtpPort=587
+smtpUser=votre.adresse@gmail.com
+smtpPassword=mot_de_passe_application
+```
+
+Le script chargera automatiquement ces paramètres s'il trouve ce fichier.
+
+#### 🛠️ Option 2 : Modifier manuellement dans le script
 
 Ouvrez le fichier `HIDS.ps1` et modifiez les lignes suivantes avec vos informations Gmail :
 
@@ -83,7 +103,8 @@ HIDS/
 │
 ├── HIDS.ps1                # Script principal PowerShell
 ├── start.bat               # Script batch pour exécuter le HIDS facilement
-└── README.md             # Ce fichier
+├── smtp_config.txt         # (Optionnel) Fichier de configuration SMTP
+└── README.md               # Ce fichier
 ```
 
 ---
@@ -109,4 +130,3 @@ HIDS/
 ## 📄 Licence
 
 Ce projet est sous licence **MIT**. Libre à vous de le modifier, redistribuer, ou l'utiliser dans vos projets.
-
